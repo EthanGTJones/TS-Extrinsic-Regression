@@ -19,7 +19,7 @@ from utils.tools import create_directory
 
 module = "RegressionExperiment"
 data_path = "data/"
-problems = ["FloodModeling3"]       # see data_loader.regression_datasets
+problems = ["BNE"]       # see data_loader.regression_datasets
 regressors = ["rocket"]    # see regressor_tools.all_models
 iterations = [1]
 norm = "none"               # none, standard, minmax

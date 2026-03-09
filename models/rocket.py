@@ -19,7 +19,7 @@ name = "Rocket"
 
 @njit(fastmath=True)
 def generate_kernels(input_length, num_kernels, num_channels=1):
-    candidate_lengths = np.array((7, 9, 11), dtype=np.int32)
+    candidate_lengths = np.array((6, 8, 10), dtype=np.int32)
     candidate_lengths = candidate_lengths[candidate_lengths < input_length]
     lengths = np.random.choice(candidate_lengths, num_kernels)
 
