@@ -79,7 +79,7 @@ def create_regressor(regressor_name, input_shape, output_directory, verbose=1, i
                   "n_jobs": 0,
                   "learning_rate": 0.1,
                   "random_state": itr - 1,
-                  "verbosity  ": verbose}
+                  "verbosity": verbose}
         return XGBoostRegressor(output_directory, verbose, kwargs)
     if regressor_name == "random_forest":
         from models.classical_models import RFRegressor
@@ -161,7 +161,7 @@ def calculate_regression_metrics(y_true, y_pred, y_true_val=None, y_pred_val=Non
     :param y_pred_val:
     :return:
     """
-    res = pd.DataFrame(data=np.zeros((1, 2), dtype=np.float), index=[0],
+    res = pd.DataFrame(data=np.zeros((1, 2), dtype=np.float64), index=[0],
                        columns=['rmse', 'mae'])
     res['rmse'] = math.sqrt(mean_squared_error(y_true, y_pred))
     res['mae'] = mean_absolute_error(y_true, y_pred)

@@ -19,8 +19,8 @@ from utils.tools import create_directory
 
 module = "RegressionExperiment"
 data_path = "data/"
-problems = ["Sample"]       # see data_loader.regression_datasets
-regressors = ["xgboost"]    # see regressor_tools.all_models
+problems = ["FloodModeling3"]       # see data_loader.regression_datasets
+regressors = ["rocket"]    # see regressor_tools.all_models
 iterations = [1]
 norm = "none"               # none, standard, minmax
 

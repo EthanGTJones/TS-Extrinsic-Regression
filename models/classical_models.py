@@ -363,7 +363,7 @@ class XGBoostRegressor(Regressor):
             search_params = {
                 "n_estimators": [100, 500, 1000],
                 "max_depth": [5, 10, 15, 20],
-                "learning_rate": loguniform(loc=0.01, scale=0.1)
+                "learning_rate": loguniform(0.01, 0.1)
             }
             search = RandomizedSearchCV(XGBRegressor(**params), search_params, n_jobs=1, cv=3,
                                         random_state=1234,

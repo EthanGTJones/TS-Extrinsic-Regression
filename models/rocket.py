@@ -7,7 +7,9 @@ import time
 
 import numpy as np
 from numba import njit, prange
+from sklearn.discriminant_analysis import StandardScaler
 from sklearn.linear_model import RidgeCV
+from sklearn.pipeline import make_pipeline
 
 from models.time_series_models import TimeSeriesRegressor
 from utils.tools import save_test_duration, save_train_duration
@@ -32,7 +34,9 @@ def generate_kernels(input_length, num_kernels, num_channels=1):
 
     for i in range(num_kernels):
 
-        _weights = np.random.normal(0, 1, (num_channels, lengths[i]))
+        c = np.int64(num_channels)
+        l = np.int64(lengths[i])
+        _weights = np.random.randn(c, l)
 
         a = lengths[:i].sum()
         b = a + lengths[i]
@@ -70,7 +74,7 @@ def apply_kernel(X, weights, length, bias, dilation, padding, num_channel_indice
     output_length = input_length - ((length - 1) * dilation)
 
     _ppv = 0
-    _max = np.NINF
+    _max = -np.inf
 
     for i in range(0, output_length, stride):
         _sum = bias
@@ -135,8 +139,7 @@ class RocketRegressor(TimeSeriesRegressor):
         self.name = name
         self.n_kernels = n_kernels
         self.kernels = None
-        self.regressor = RidgeCV(alphas=np.logspace(-3, 3, 10),
-                                 normalize=True)
+        self.regressor = make_pipeline(StandardScaler(), RidgeCV(alphas=np.logspace(-3, 3, 10), cv=None))
 
     def fit(self,
             x_train: np.array,
